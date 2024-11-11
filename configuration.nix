@@ -2,7 +2,7 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 {
   imports =
@@ -134,48 +134,9 @@
   };
 
 
-  services.caddy = 
-	let
-	    caddy = with pkgs; stdenv.mkDerivation rec {
-		pname = "caddy";
-		version = "2.7.6";
-		dontUnpack = true;
-
-
-		nativeBuildInputs = [ git go xcaddy ];
-
-		plugins = [
-		  "github.com/caddy-dns/cloudflare"
-		];
-
-		configurePhase = ''
-		    export GOCACHE=$TMPDIR/go-cache
-		    export GOPATH="$TMPDIR/go"
-		'';
-
-		buildPhase = let
-		  pluginArgs = lib.concatMapStringsSep " " (plugin: "--with ${plugin}") plugins;
-		in ''
-		  runHook preBuild
-		  ${xcaddy}/bin/xcaddy build "v${version}" ${pluginArgs}
-		  runHook postBuild
-		'';
-
-		installPhase = ''
-		  runHook preInstall
-		  mkdir -p $out/bin
-		  mv caddy $out/bin
-		  runHook postInstall
-		'';
-
-		meta = with lib; {
-			mainProgram = "caddy";
-		};
-	    };
-	in
-  {
+  services.caddy = {
   	enable = true;
-        package = caddy;
+        package = inputs.caddy-patched.packages.x86_64-linux.caddy;
 	extraConfig = ''
 	(cloudflare) {
           	tls {
