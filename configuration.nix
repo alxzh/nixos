@@ -217,10 +217,10 @@
     go
     xcaddy
     cacert
-    unstable.nh
     traefik
     htop
     atop
+    unstable.jujutsu
   ];
   
   programs.fish.enable = true;
@@ -228,6 +228,13 @@
         enable = true;
         viAlias = true;
         vimAlias = true;
+  };
+  programs.nh = {
+    enable = true;
+    clean.enable = true;
+    clean.extraArgs = "--keep-since 4d --keep 3";
+    flake = "/home/alex/nix";
+    package = pkgs.unstable.nh;
   };
   
 
