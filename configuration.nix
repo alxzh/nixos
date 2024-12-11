@@ -55,7 +55,6 @@
   # };
 
   # Enable sound.
-  sound.enable = true;
   services.pipewire.enable = true;
   services.tailscale = {
   	enable = true;
