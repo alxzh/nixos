@@ -220,7 +220,7 @@
     htop
     atop
     unstable.jujutsu
-    inputs.ghostty.packages.${system}.default
+    unstable.ghostty
   ];
   
   programs.fish.enable = true;
