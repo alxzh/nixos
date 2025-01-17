@@ -216,7 +216,6 @@
     go
     xcaddy
     cacert
-    traefik
     htop
     atop
     unstable.jujutsu
