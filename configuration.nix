@@ -219,7 +219,7 @@
     htop
     atop
     unstable.jujutsu
-    unstable.ghostty
+    ghostty
   ];
   
   programs.fish.enable = true;

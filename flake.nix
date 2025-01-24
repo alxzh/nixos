@@ -8,12 +8,9 @@
     	url = "github:strideynet/nixos-caddy-patched/main";
     	inputs.nixpkgs.follows = "nixpkgs";
     };
-    ghostty = {
-      url = "github:ghostty-org/ghostty";
-    };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, ghostty, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable,  ... }@inputs:
   let
         system = "x86_64-linux";
         overlay-unstable = final: prev: {
@@ -29,11 +26,6 @@
                 modules = [
                         # Overlays-module makes "pkgs.unstable" available in configuration.nix
                         ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
-			{
-				environment.systemPackages = [
-					ghostty.packages.x86_64-linux.default
-				];
-			}
                         ./configuration.nix
                 ];
         };
