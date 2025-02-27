@@ -117,7 +117,7 @@
 		"/home/alex/books/podcasts:/podcasts" 
 		"/home/alex/books/metadata:/metadata" 
 	];
-	ports = ["13378:13378"];
+	ports = ["13378:80"];
       };
     };
   };
@@ -169,6 +169,10 @@
 	'';
         virtualHosts."vw.litvin.online".extraConfig = ''
         	reverse_proxy http://127.0.0.1:8001
+		import cloudflare
+        '';
+        virtualHosts."abs.litvin.online".extraConfig = ''
+        	reverse_proxy http://127.0.0.1:13378
 		import cloudflare
         '';
         virtualHosts."hb.litvin.online".extraConfig = ''
