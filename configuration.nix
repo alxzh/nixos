@@ -108,6 +108,17 @@
 	image = "ghcr.io/home-assistant/home-assistant:stable"; # Warning: if the tag does not change, the image will not be updated
 	extraOptions = ["--network=host"];
       };
+      audiobookshelf = {
+	image = "ghcr.io/advplyr/audiobookshelf";
+	environment.TZ = "America/Los_Angeles";
+	volumes = [ 
+		"/home/alex/books/config:/config" 
+		"/home/alex/books/audiobooks:/audiobooks" 
+		"/home/alex/books/podcasts:/podcasts" 
+		"/home/alex/books/metadata:/metadata" 
+	];
+	ports = ["13378:13378"];
+      };
     };
   };
   
