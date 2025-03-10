@@ -224,6 +224,9 @@
     zlib-ng
     starship
     git
+    bat
+    eza
+    zoxide
     restic
     sqlite
     gnumake
