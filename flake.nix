@@ -2,7 +2,7 @@
   description = "Vizor Server flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-24.11";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     caddy-patched = {
     	url = "github:strideynet/nixos-caddy-patched/main";
