@@ -22,11 +22,17 @@
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.kernel.sysctl = {
+    "net.ipv4.conf.all.forwarding" = true;
+    "net.ipv6.conf.all.forwarding" = true;
+    "net.ipv4.tcp_ecn" = true;
+  };
 
   networking.hostName = "vizor"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;
+
   networking.firewall.enable = false;
   networking.nameservers = [ "1.1.1.1#one.one.one.one" "1.0.0.1#one.one.one.one" ];
 
@@ -38,6 +44,10 @@
 	  dnsovertls = "true";
   };
   services.fwupd.enable = true;
+
+  services.nebula.networks.litvin = {
+	enable = false;
+  };
 
   # Set your time zone.
   time.timeZone = "America/Los_Angeles";
@@ -59,6 +69,10 @@
   services.tailscale = {
   	enable = true;
 	package = pkgs.unstable.tailscale;
+	useRoutingFeatures = "both";
+	extraSetFlags = [
+	    "--advertise-routes=192.168.2.0/24"
+	];
   };
   
   virtualisation = {
@@ -82,6 +96,7 @@
         ports = [ "127.0.0.1:8001:8001" "127.0.0.1:3012:3012" ];
         volumes = [ "/home/alex/services/vaultwarden/vault:/data/" ];
         environmentFiles = [ "/home/alex/services/vaultwarden/vaultwarden.conf" ];
+	labels = { "io.containers.autoupdate" = "registry"; };
       };
       homebridge = {
         image = "docker.io/homebridge/homebridge:latest";
@@ -94,6 +109,7 @@
           HOMEBRIDGE_CONFIG_UI_PORT = "8581";
         };
         extraOptions = ["--network=host"];
+	labels = { "io.containers.autoupdate" = "registry"; };
       };
       scrypted = {
         image = "ghcr.io/koush/scrypted:latest";
@@ -101,6 +117,7 @@
         ports = ["10443:10443"];
         autoStart = true;
         extraOptions = ["--network=host"];
+	labels = { "io.containers.autoupdate" = "registry"; };
       };
       homeassistant = {
 	volumes = [ "/home/alex/services/home-assistant:/config" ];
@@ -121,6 +138,8 @@
       };
     };
   };
+
+  systemd.timers."podman-auto-update".wantedBy = [ "timers.target" ];
   
   systemd.timers."vaultwardenbackup" = {
     wantedBy = [ "timers.target" ];
@@ -237,6 +256,7 @@
     htop
     atop
     unstable.jujutsu
+    nebula
     ghostty
   ];
   
