@@ -150,8 +150,9 @@
 		TZ = "America/Los_Angeles";
 		PUID = "1000";
 		GUID = "992";
-		CRON_SCHEDULE = "0 */6 * * *";
+		CRON_SCHEDULE = "0 6,19 * * *";
 		CRON_RUN_ON_START = "true";
+		UPDATE_YT_DLP_ON_START = "nightly";
 	};
 	volumes = [
 		"/home/alex/jellyfin/yt/config:/config"
@@ -183,27 +184,6 @@
       User = "root";
     };
   };
-
-	#  systemd.timers."ytdl-sub-cron" = {
-	#  	wantedBy = [ "timers.target" ];
-	# timerConfig = {
-	# 	OnBootSec = "5min";
-	# 	OnUnitActiveSec = "2h";
-	# 	Persistent = true;
-	# 	Unit = "ytdl-sub.service";
-	# };
-	#  };
-	#
-	#  systemd.user.services."ytdl-sub" = {
-	# description = "Download YT videos";
-	# after = [ "network-online.target" ];
-	#    	wants = [ "network-online.target" ];
-	# serviceConfig = {
-	# 	Type = "oneshot";
-	# 	ExecStart = "${pkgs.ytdl-sub}/bin/ytdl-sub --config /home/alex/jellyfin/yt/config/config.yaml sub /home/alex/jellyfin/yt/configsubscriptions.yaml";
-	# };
-	#  };
-
 
   services.caddy = {
   	enable = true;
@@ -298,9 +278,6 @@
     htop
     atop
     unstable.jujutsu
-    nebula
-    yt-dlp
-    ytdl-sub
     ghostty
   ];
   
