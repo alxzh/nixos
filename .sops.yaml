@@ -1,6 +1,6 @@
 keys:
   - &admin age1kd9ldavk20kvncu77qusdjl9xasn0r3xwxytnwn7cuvrst27gucq3typwk
-  - &server "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINbk7sCHrp/DBPS2w/7QP7ikW+miGP0zfltHySTT8yiC"
+  - &server age1gvqgc4z9d78jnfg84t7zghmr62ffexyg4qa9a6md8mnsfcq9t4ws5mpcat
 
 creation_rules:
   - path_regex: ^secrets/.*\.yaml$

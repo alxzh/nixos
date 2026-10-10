@@ -1,33 +1,15 @@
 { lib, config, ... }:
 
-sops = {
-  defaultSopsFile = ./secrets/secrets.yaml;
-
-  # The server uses its SSH host private key for decryption.
-  age.sshKeyPaths = [
-    "/etc/ssh/ssh_host_ed25519_key"
-  ];
-
-  secrets."cloudflare-acme-env" = {
-    owner = "acme";
-    group = "acme";
-    mode = "0400";
-  };
-};
-
 let
   acmeCert = "litvin.online";
 
   headers = ''
-    add_header Strict-Transport-Security \
-      "max-age=63072000; includeSubDomains; preload" always;
+    add_header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload" always;
     add_header X-XSS-Protection "1; mode=block" always;
     add_header X-Content-Type-Options "nosniff" always;
     add_header Referrer-Policy "same-origin" always;
-    add_header Content-Security-Policy \
-      "frame-ancestors https://litvin.cloud https://*.litvin.cloud;" always;
-    add_header Permissions-Policy \
-      "geolocation=(self \"https://litvin.cloud\" \"https://*.litvin.cloud\")" always;
+    add_header Content-Security-Policy "frame-ancestors https://litvin.cloud https://*.litvin.cloud;" always;
+    add_header Permissions-Policy "geolocation=(self \"https://litvin.cloud\" \"https://*.litvin.cloud\")" always;
 
     # Hides the version, but stock nginx still emits "Server: nginx".
     server_tokens off;
@@ -56,6 +38,20 @@ let
   };
 in
 {
+  sops = {
+    defaultSopsFile = ./secrets/secrets.yaml;
+  
+    # The server uses its SSH host private key for decryption.
+    age.sshKeyPaths = [
+      "/etc/ssh/ssh_host_ed25519_key"
+    ];
+  
+    secrets."cloudflare-acme-env" = {
+      owner = "acme";
+      group = "acme";
+      mode = "0400";
+    };
+  };
 
   security.acme = {
     acceptTerms = true;
