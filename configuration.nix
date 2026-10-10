@@ -12,11 +12,8 @@
     ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  #nix.settings.sandbox = false;
 
   nixpkgs.config.allowUnfree = true;
-  #system.autoUpgrade.enable  = true;
-  #system.autoUpgrade.allowReboot  = true;
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
@@ -46,10 +43,6 @@
   };
   services.fwupd.enable = true;
 
-  services.nebula.networks.litvin = {
-	enable = false;
-  };
-
   services.rynk-studio = {
 	enable = true;
   };
@@ -57,17 +50,8 @@
   # Set your time zone.
   time.timeZone = "America/Los_Angeles";
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
-  # console = {
-  #   font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  #   useXkbConfig = true; # use xkb.options in tty.
-  # };
 
   # Enable sound.
   services.pipewire.enable = true;
@@ -129,12 +113,6 @@
         extraOptions = ["--network=host"];
 	labels = { "io.containers.autoupdate" = "registry"; };
       };
-	#      homeassistant = {
-	# volumes = [ "/home/alex/services/home-assistant:/config" ];
-	# environment.TZ = "America/Los_Angeles";
-	# image = "ghcr.io/home-assistant/home-assistant:stable"; # Warning: if the tag does not change, the image will not be updated
-	# extraOptions = ["--network=host"];
-	#      };
       audiobookshelf = {
 	image = "ghcr.io/advplyr/audiobookshelf";
 	environment.TZ = "America/Los_Angeles";
@@ -248,17 +226,6 @@
   };
   
 
-  # xdg.portal.wlr.enable = true;
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
