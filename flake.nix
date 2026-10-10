@@ -8,6 +8,14 @@
     	url = "github:strideynet/nixos-caddy-patched/main";
     	inputs.nixpkgs.follows = "nixpkgs";
     };
+    rynk-studio = {
+	url = "github:alxzh/rynk-studio";
+	inputs.nixpkgs.follows = "nixpkgs";
+    };
+    sops-nix = {
+        url = "github:Mic92/sops-nix";
+        inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, nixpkgs-unstable,  ... }@inputs:
@@ -26,6 +34,8 @@
                 modules = [
                         # Overlays-module makes "pkgs.unstable" available in configuration.nix
                         ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
+			inputs.sops-nix.nixosModules.sops
+			inputs.rynk-studio.nixosModules.default
                         ./configuration.nix
                 ];
         };
