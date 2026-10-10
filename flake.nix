@@ -4,10 +4,6 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-26.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-    caddy-patched = {
-    	url = "github:strideynet/nixos-caddy-patched/main";
-    	inputs.nixpkgs.follows = "nixpkgs";
-    };
     rynk-studio = {
 	url = "github:alxzh/rynk-studio";
 	inputs.nixpkgs.follows = "nixpkgs";

@@ -190,65 +190,6 @@
     };
   };
 
-	#  services.caddy = {
-	#  	enable = true;
-	#        package = inputs.caddy-patched.packages.x86_64-linux.caddy;
-	# extraConfig = ''
-	# (cloudflare) {
-	#          	tls {
-	# 		dns cloudflare Z0_VMmrWjCClAalaEXvyd9PvZsnSsVNf8ySKg-Cm
-	# 		resolvers 1.1.1.1
-	# 		propagation_delay 15s
-	#         		propagation_timeout 10m
-	# 	}
-	# }
-	#
-	# (header) {
-	# 	header {
-	# 		Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
-	# 		X-XSS-Protection "1; mode=block"
-	# 		X-Content-Type-Options "nosniff"
-	# 		Referrer-Policy "same-origin"
-	# 		-Server
-	# 		Content-Security-Policy "frame-ancestors litvin.cloud *.litvin.cloud"
-	# 		Permissions-Policy "geolocation=(self litvin.cloud *.litvin.cloud)"
-	# 	}
-	# }
-	# '';
-	#        virtualHosts."vw.litvin.online".extraConfig = ''
-	#        	reverse_proxy http://127.0.0.1:8001
-	# 	import cloudflare
-	#        '';
-	#        virtualHosts."abs.litvin.online".extraConfig = ''
-	#        	reverse_proxy http://127.0.0.1:13378
-	# 	import cloudflare
-	#        '';
-	#        virtualHosts."hb.litvin.online".extraConfig = ''
-	#        	reverse_proxy http://127.0.0.1:8581
-	# 	import cloudflare
-	#        '';
-	#        virtualHosts."sd.litvin.online".extraConfig = ''
-	#        	reverse_proxy https://127.0.0.1:10443 {
-	# 		transport http {
-	#                        	tls_insecure_skip_verify
-	#                	}
-	# 	}
-	# 	import cloudflare
-	#        '';
-	#        virtualHosts."ha.litvin.online".extraConfig = ''
-	#        	reverse_proxy http://127.0.0.1:8123
-	# 	import cloudflare
-	# 	import header
-	# 	encode gzip
-	#        '';
-	# 	virtualHosts."kb.litvin.online".extraConfig = ''
-	# 	reverse_proxy http://127.0.0.1:8000
-	# 	import cloudflare
-	# '';
-	#  };
-	#  systemd.services.caddy.serviceConfig.AmbientCapabilities = "cap_net_bind_service";
-	#  systemd.services.caddy.serviceConfig.CapabilityBoundingSet = "cap_net_bind_service";
-
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.alex = {

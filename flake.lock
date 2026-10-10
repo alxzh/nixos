@@ -1,26 +1,5 @@
 {
   "nodes": {
-    "caddy-patched": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1735478964,
-        "narHash": "sha256-KYzGo1gJpYaX7xUM2h176UAZBLFsaP6FS7csmVDZlio=",
-        "owner": "strideynet",
-        "repo": "nixos-caddy-patched",
-        "rev": "9d918f680ad20832189b0f4a6680eccb2120dfdb",
-        "type": "github"
-      },
-      "original": {
-        "owner": "strideynet",
-        "ref": "main",
-        "repo": "nixos-caddy-patched",
-        "type": "github"
-      }
-    },
     "fenix": {
       "inputs": {
         "nixpkgs": [
@@ -95,7 +74,6 @@
     },
     "root": {
       "inputs": {
-        "caddy-patched": "caddy-patched",
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "rynk-studio": "rynk-studio",

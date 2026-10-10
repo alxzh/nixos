@@ -55,7 +55,7 @@ in
 
   security.acme = {
     acceptTerms = true;
-    defaults.email = "your-email@example.com";
+    defaults.email = "alex.vizor@gmail.com";
 
     certs."litvin.online" = {
       domain = "litvin.online";
@@ -63,6 +63,9 @@ in
 
       dnsProvider = "cloudflare";
       dnsResolver = "1.1.1.1:53";
+
+      # Skip lego's own DNS check; wait 2 minutes, then let Let's Encrypt verify.
+      extraLegoFlags = [ "--dns.propagation-wait" "2m" ];
 
       # This file must be created outside the Nix store.
       environmentFile = config.sops.secrets."cloudflare-acme-env".path;
